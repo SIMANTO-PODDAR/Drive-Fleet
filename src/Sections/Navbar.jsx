@@ -1,4 +1,6 @@
 import { Avatar } from "@heroui/react";
+import Image from "next/image";
+import Logo from "../../public/drivefleet-logo.png"
 import Link from "next/link";
 import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { IoAddCircleOutline, IoBookmarksOutline } from "react-icons/io5";
@@ -14,7 +16,7 @@ const Navbar = () => {
             flex-col justify-center
             sm:flex-row">
                 <div className="sm:navbar-start">
-                    <p>LOGO</p>
+                    <Image src={Logo} alt='DriveFleet Logo' height={40} title="Drive Fleet"/>
                 </div>
                 <div className="navbar-center lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-4 font-bold">
