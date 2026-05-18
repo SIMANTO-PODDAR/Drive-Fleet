@@ -1,4 +1,5 @@
 import { Button } from "@heroui/react";
+import Link from "next/link";
 
 const CarCard = ({ car }) => {
     return (
@@ -21,8 +22,12 @@ const CarCard = ({ car }) => {
                     </p>
                     <div className="card-actions justify-between">
                         <div className="badge badge-outline">
-                            $ {car.RentPrice}</div>
-                        <Button className="btn btn-sm flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Details</Button>
+                            $ {car.RentPrice}
+                        </div>
+
+                        <Link href={`/explore-cars/${car._id}`} >
+                            <Button className="btn btn-sm flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Details</Button>
+                        </Link>
                     </div>
                 </div>
             </div>
