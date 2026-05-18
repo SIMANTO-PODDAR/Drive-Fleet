@@ -64,7 +64,7 @@ const Reviews = () => {
                                 <Avatar className="w-14 h-14 border-2 ">
                                     <Avatar.Image
                                         alt={"Name"}
-                                        src={"null"}
+                                        src={"https://i.ibb.co.com"}
                                         referrerPolicy="no-referrer"
                                     />
                                     <Avatar.Fallback>N</Avatar.Fallback>

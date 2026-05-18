@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Img from '../../public/banner.jpg'
 import { LuChevronsRight } from "react-icons/lu";
+import Link from "next/link";
 
 
 const Hero = () => {
@@ -21,10 +22,12 @@ const Hero = () => {
                             Reliable car rentals for every journey — fast booking, affordable pricing, and a fleet you can trust anytime, anywhere.
                         </p>
 
-                        <button className="btn text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF] flex gap-2 items-center">
-                            Explore Cars
-                            <span className="text-xl"><LuChevronsRight /></span>
-                        </button>
+                        <Link href={'/explore-cars'}>
+                            <button className="btn text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF] flex gap-2 items-center">
+                                Explore Cars
+                                <span className="text-xl"><LuChevronsRight /></span>
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
