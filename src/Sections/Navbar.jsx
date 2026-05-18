@@ -55,17 +55,17 @@ const Navbar = () => {
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-4 w-33 p-1.5 shadow">
 
-                            <Link className="btn btn-ghost btn-sm flex gap-2  items-center justify-start font-bold px-0" href={'/add-car'}>
+                            <Link className="btn btn-ghost btn-sm flex gap-2  items-center justify-start font-bold px-0 hover:text-white hover:bg-linear-to-r from-[#0D0D33] to-[#0033FF]" href={'/add-car'}>
                                 <span className="text-xl"><IoAddCircleOutline /></span>
                                 Add Car
                             </Link>
 
-                            <Link className="btn btn-ghost btn-sm flex gap-2  items-center justify-start font-bold px-0" href={'/my-bookings'}>
+                            <Link className="btn btn-ghost btn-sm flex gap-2  items-center justify-start font-bold px-0 hover:text-white hover:bg-linear-to-r from-[#0D0D33] to-[#0033FF]" href={'/my-bookings'}>
                                 <span className="text-xl"><IoBookmarksOutline /></span>
                                 My Bookings
                             </Link>
 
-                            <Link className="btn btn-ghost btn-sm flex gap-2  items-center justify-start font-bold px-0" href={'/my-added-cars'}>
+                            <Link className="btn btn-ghost btn-sm flex gap-2  items-center justify-start font-bold px-0 hover:text-white hover:bg-linear-to-r from-[#0D0D33] to-[#0033FF]" href={'/my-added-cars'}>
                                 <span className="text-xl"><MdOutlinePlaylistAddCircle /></span>
                                 My Added Cars
                             </Link>
