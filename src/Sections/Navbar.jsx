@@ -8,7 +8,7 @@ import { MdOutlinePlaylistAddCircle } from "react-icons/md";
 
 const Navbar = () => {
     const user = true;
-    // const user = false; 
+    // const user = false;
 
     return (
         <div>
@@ -16,7 +16,7 @@ const Navbar = () => {
             flex-col justify-center
             sm:flex-row">
                 <div className="sm:navbar-start">
-                    <Image src={Logo} alt='DriveFleet Logo' height={40} title="Drive Fleet"/>
+                    <Image src={Logo} alt='DriveFleet Logo' height={40} title="Drive Fleet" />
                 </div>
                 <div className="navbar-center lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-4 font-bold">
@@ -30,7 +30,7 @@ const Navbar = () => {
                 <div className="sm:navbar-end">
 
                     <div className={`${user ? 'hidden' : ''}`}>
-                        <Link className="btn btn-info font-bold text-red-50 flex gap-2 items-center" href={'/login'}>
+                        <Link className="btn font-bold text-white  bg-linear-to-r from-[#0D0D33] to-[#0033FF] flex gap-2 items-center hover:outline outline-[#0033FF]" href={'/login'}>
                             Login
                             <span className="text-xl rotate-180"><AiOutlineLogin /></span>
                         </Link>
@@ -46,7 +46,7 @@ const Navbar = () => {
                                 </Avatar>
                             </div>
 
-                            <div tabIndex={0} role="button" className="btn btn-ghost font-bold">
+                            <div tabIndex={0} role="button" className="btn btn-ghost font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">
                                 {`Name`}
                             </div>
                         </div>
