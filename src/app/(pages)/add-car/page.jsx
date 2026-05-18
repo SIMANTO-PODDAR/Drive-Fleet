@@ -45,12 +45,12 @@ const AddCarPage = () => {
                 <Card>
                     <form
                         onSubmit={addCar}
-                        className="p-10 space-y-8 w-3xl"
+                        className="p-10 space-y-8 min-w-80 sm:w-150 lg:w-3xl"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Car Name */}
                             <div className="md:col-span-2">
-                                <TextField name="CarName" isRequired>
+                                <TextField name="Name" isRequired>
                                     <Label>Car Name</Label>
                                     <Input placeholder="Enter car name" className="rounded-2xl" />
                                     <FieldError />
@@ -58,7 +58,7 @@ const AddCarPage = () => {
                             </div>
 
                             {/* Daily Rent Price */}
-                            <TextField name="DailyRentPrice" type="number" isRequired>
+                            <TextField name="RentPrice" type="number" isRequired>
                                 <Label>Daily Rent Price</Label>
                                 <Input
                                     type="number"
@@ -71,7 +71,7 @@ const AddCarPage = () => {
                             {/* Car Type */}
                             <div>
                                 <Select
-                                    name="CarType"
+                                    name="Type"
                                     isRequired
                                     className="w-full"
                                     placeholder="Select a car type"
@@ -116,7 +116,7 @@ const AddCarPage = () => {
 
                             {/* Car Image URL */}
                             <div className="md:col-span-2">
-                                <TextField name="CarImageUrl" isRequired>
+                                <TextField name="ImgURL" isRequired>
                                     <Label >Car Image URL</Label>
                                     <Input
                                         type="url"
@@ -128,7 +128,7 @@ const AddCarPage = () => {
                             </div>
 
                             {/* Seat Capacity */}
-                            <TextField name="SeatCapacity" isRequired>
+                            <TextField name="Capacity" isRequired>
                                 <Label>Seat Capacity</Label>
                                 <Input
                                     placeholder="Enter seat capacity"
@@ -189,11 +189,11 @@ const AddCarPage = () => {
                         </div>
 
                         {/* Submit Btn*/}
-                        <div className="flex justify-end">
+                        <div className="">
                             <Button
                                 type="submit"
                                 variant="outline"
-                                className="font-bold text-white  bg-linear-to-r from-[#0D0D33] to-[#0033FF]"
+                                className="w-full font-bold text-white  bg-linear-to-r from-[#0D0D33] to-[#0033FF]"
                             >
                                 <span className="text-xl"><IoAddCircleOutline /></span>
                                 Add Car

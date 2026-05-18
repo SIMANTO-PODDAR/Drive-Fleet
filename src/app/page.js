@@ -1,3 +1,4 @@
+import AvailableCars from "@/Sections/AvailableCars";
 import Hero from "@/Sections/Hero";
 import OurFleetPartners from "@/Sections/OurFleetPartners";
 import Reviews from "@/Sections/Reviews";
@@ -6,6 +7,8 @@ export default function Home() {
   return (
     <div>
       <Hero />
+
+      <AvailableCars />
 
       {/* Static Sections 1 */}
       <OurFleetPartners />

@@ -6,7 +6,7 @@ import Toyota from "../../public/toyota.png";
 
 const OurFleetPartners = () => {
     return (
-        <div>
+        <div className="mt-3 sm:mt-20">
             <section className="card py-20 bg-[#0D0D33] text-white">
                 <div className="mx-auto px-6 text-center">
 

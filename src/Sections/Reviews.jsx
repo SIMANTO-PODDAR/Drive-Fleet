@@ -9,7 +9,7 @@ const Reviews = () => {
 
 
                 <div className="text-center mb-14">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                    <h2 className="text-4xl text-[#0D0D33] md:text-5xl font-bold mb-4">
                         Travel Experiences
                     </h2>
 
@@ -20,7 +20,7 @@ const Reviews = () => {
                 </div>
 
 
-                <div className="flex">
+                <div>
                     <Marquee
                         pauseOnHover='true'
                         autoFill='true'
