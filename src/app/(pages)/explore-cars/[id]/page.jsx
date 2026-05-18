@@ -1,6 +1,10 @@
 
-const CarDetailsPage = async () => {
+const CarDetailsPage = async ({ params }) => {
+    const { id } = await params;
 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars/${id}`);
+
+    const car = await res.json();
 
     return (
         <div className="mb-12">
@@ -10,14 +14,15 @@ const CarDetailsPage = async () => {
             <div className="hero bg-base-200 min-h-[80vh]">
                 <div className="hero-content flex flex-col sm:grid sm:grid-cols-2 justify-center mx-auto gap-10">
                     <img
-                        src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-                        className="w-50 sm:w-100 rounded-lg shadow-2xl"
+                        src={car.ImgURL}
+                        alt={car.Name}
+                        className="w-50 sm:w-100 rounded-lg shadow-2xl overflow-hidden"
                     />
 
                     <div className="min-w-70 sm:w-auto">
-                        <h1 className="text-3xl sm:text-4xl font-bold">Name</h1>
+                        <h1 className="text-3xl sm:text-4xl font-bold">{car.Name}</h1>
                         <p className="py-6">
-                            Description
+                            {car.Description}
                         </p>
 
                         <div className="grid gap-3 max-w-60">
@@ -27,7 +32,7 @@ const CarDetailsPage = async () => {
                                     <h2>BookBy</h2>
                                 </label>
 
-                                <span>{}</span>
+                                <span>{car.BookBy}</span>
                             </div>
 
                             <div className="flex items-center border rounded-xl p-2 justify-between">
@@ -36,7 +41,7 @@ const CarDetailsPage = async () => {
                                     <h2>Type</h2>
                                 </label>
 
-                                <span>{}</span>
+                                <span>{car.Type}</span>
                             </div>
 
                             <div className="flex items-center border rounded-xl p-2 justify-between">
@@ -45,7 +50,7 @@ const CarDetailsPage = async () => {
                                     <h2>Capacity</h2>
                                 </label>
 
-                                <span>{}</span>
+                                <span>{car.Capacity}</span>
                             </div>
 
                             <div className="flex items-center border rounded-xl p-2 justify-between">
@@ -54,7 +59,7 @@ const CarDetailsPage = async () => {
                                     <h2>RentPrice</h2>
                                 </label>
 
-                                <span>{}</span>
+                                <span>{car.RentPrice}</span>
                             </div>
 
                             <div className="flex items-center border rounded-xl p-2 justify-between">
@@ -62,7 +67,7 @@ const CarDetailsPage = async () => {
                                     <h2 className="badge badge-info">Status</h2>
                                 </label>
 
-                                <span className="badge badge-info">{`s`}</span>
+                                <span className={`badge badge-outline  badge-sm ${car.Status == "Available" ? 'badge-success' : 'badge-warning'}`}>{car.Status}</span>
                             </div>
                         </div>
 
@@ -77,5 +82,3 @@ const CarDetailsPage = async () => {
 };
 
 export default CarDetailsPage;
-
-
