@@ -1,6 +1,42 @@
+'use client'
 import { Button, FieldError, Input, Label, ListBox, TextArea, TextField, Select, Card } from "@heroui/react";
+import toast from "react-hot-toast";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 const AddCarPage = () => {
+
+    const addCar = async (event) => {
+        event.preventDefault();
+        const LoadingToast = toast.loading('Adding car...');
+
+        const formData = new FormData(event.currentTarget);
+        const carData = Object.fromEntries(formData.entries());
+
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(carData)
+        });
+
+        const data = await res;
+
+        if (data.status == 200) {
+            toast.success('Car added successfully!', {
+                id: LoadingToast
+            });
+        }
+        else {
+            toast.error('Something went wrong! Try again.', {
+                id: LoadingToast
+            });
+        };
+
+
+    };
+
     return (
         <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-center mt-3">Add a New Car</h1>
@@ -8,6 +44,7 @@ const AddCarPage = () => {
             <div className="flex justify-center">
                 <Card>
                     <form
+                        onSubmit={addCar}
                         className="p-10 space-y-8 w-3xl"
                     >
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -79,7 +116,7 @@ const AddCarPage = () => {
 
                             {/* Car Image URL */}
                             <div className="md:col-span-2">
-                                <TextField name="carImageUrl" isRequired>
+                                <TextField name="CarImageUrl" isRequired>
                                     <Label >Car Image URL</Label>
                                     <Input
                                         type="url"
@@ -109,7 +146,7 @@ const AddCarPage = () => {
 
                             {/* Description */}
                             <div className="md:col-span-2">
-                                <TextField name="description" isRequired>
+                                <TextField name="Description" isRequired>
                                     <Label>Description</Label>
                                     <TextArea
                                         placeholder="Write details about the car..."
@@ -122,7 +159,7 @@ const AddCarPage = () => {
                             {/* Availability Status */}
                             <div>
                                 <Select
-                                    name="AvailabilityStatus"
+                                    name="Status"
                                     isRequired
                                     className="w-full"
                                     placeholder="Available / Unavailable"
@@ -158,6 +195,7 @@ const AddCarPage = () => {
                                 variant="outline"
                                 className="font-bold text-white  bg-linear-to-r from-[#0D0D33] to-[#0033FF]"
                             >
+                                <span className="text-xl"><IoAddCircleOutline /></span>
                                 Add Car
                             </Button>
                         </div>
