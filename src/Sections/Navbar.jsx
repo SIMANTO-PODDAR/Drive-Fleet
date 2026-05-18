@@ -30,7 +30,7 @@ const Navbar = () => {
                 <div className="sm:navbar-end">
 
                     <div className={`${user ? 'hidden' : ''}`}>
-                        <Link className="btn font-bold text-white  bg-linear-to-r from-[#0D0D33] to-[#0033FF] flex gap-2 items-center hover:outline outline-[#0033FF]" href={'/login'}>
+                        <Link className="btn font-bold text-white  bg-linear-to-r from-[#0D0D33] to-[#0033FF] hover:outline outline-[#0033FF] flex gap-2 items-center" href={'/login'}>
                             Login
                             <span className="text-xl rotate-180"><AiOutlineLogin /></span>
                         </Link>
