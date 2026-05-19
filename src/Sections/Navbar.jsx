@@ -7,8 +7,8 @@ import { IoAddCircleOutline, IoBookmarksOutline } from "react-icons/io5";
 import { MdOutlinePlaylistAddCircle } from "react-icons/md";
 
 const Navbar = () => {
-    const user = true;
-    // const user = false;
+    // const user = true;
+    const user = false;
 
     return (
         <div>
