@@ -1,12 +1,41 @@
 "use client"
 import GoogleLoginButton from "@/Components/GoogleLoginButton";
+import { authClient } from "@/lib/auth-client";
 import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import Link from "next/link";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
     const [eyeSlash, setEyeSlash] = useState(false);
+
+    const Login = async (event) => {
+        event.preventDefault();
+        const LoadingToast = toast.loading('Processing your request...');
+
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+
+        const { data, error } = await authClient.signIn.email({
+            email: email,
+            password: password,
+            callbackURL: "/",
+        });
+
+        if (data) {
+            toast.success("Login successfully.", {
+                id: LoadingToast
+            });
+        };
+
+        if (error) {
+            toast.error(error.message, {
+                id: LoadingToast
+            });
+        };
+    };
 
     return (
         <div>
@@ -24,7 +53,7 @@ const LoginPage = () => {
                 <div className="justify-center mt-5">
 
                     <Form className="flex w-96 flex-col gap-4"
-                    // onSubmit={}
+                        onSubmit={Login}
                     >
 
                         {/* Email */}
