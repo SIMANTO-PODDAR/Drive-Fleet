@@ -1,3 +1,4 @@
+"use client"
 import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import Logo from "../../public/drivefleet-logo.png"
@@ -5,13 +6,28 @@ import Link from "next/link";
 import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { IoAddCircleOutline, IoBookmarksOutline } from "react-icons/io5";
 import { MdOutlinePlaylistAddCircle } from "react-icons/md";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-    // const user = true;
-    const user = false;
+    const { data } = authClient.useSession();
+    const user = data?.user;
+    const router = useRouter();
+
+    const LogOut = async () => {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    toast.success('Log out successfully!');
+                    router.push("/");
+                },
+            },
+        });
+    }
 
     return (
-        <div>
+        <div className="sm:sticky top-0 z-50">
             <div className="navbar bg-base-100 shadow-sm 
             flex-col justify-center
             sm:flex-row">
@@ -42,12 +58,12 @@ const Navbar = () => {
                                 <Avatar>
                                     <Avatar.Image alt={user?.name} src={user?.image}
                                         referrerPolicy="no-referrer" />
-                                    <Avatar.Fallback>N</Avatar.Fallback>
+                                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
                                 </Avatar>
                             </div>
 
                             <div tabIndex={0} role="button" className="btn btn-ghost font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">
-                                {`Name`}
+                                {user?.name}
                             </div>
                         </div>
 
@@ -70,7 +86,7 @@ const Navbar = () => {
                                 My Added Cars
                             </Link>
 
-                            <button className="btn btn-error font-bold text-white flex gap-2 items-center" >
+                            <button onClick={LogOut} className="btn btn-error font-bold text-white flex gap-2 items-center" >
                                 Logout
                                 <span className="text-xl"><AiOutlineLogout /></span>
                             </button>

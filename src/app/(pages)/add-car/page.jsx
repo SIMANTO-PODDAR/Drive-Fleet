@@ -1,16 +1,32 @@
 'use client'
+import { authClient } from "@/lib/auth-client";
 import { Button, FieldError, Input, Label, ListBox, TextArea, TextField, Select, Card } from "@heroui/react";
 import toast from "react-hot-toast";
 import { IoAddCircleOutline } from "react-icons/io5";
 
 const AddCarPage = () => {
 
+    const { data } = authClient.useSession();
+    const user = data?.user;
+
     const addCar = async (event) => {
         event.preventDefault();
         const LoadingToast = toast.loading('Adding car...');
 
-        const formData = new FormData(event.currentTarget);
-        const carData = Object.fromEntries(formData.entries());
+        const Name = event.target.Name.value;
+        const Status = event.target.Status.value;
+        const Description = event.target.Description.value;
+        const PickupLocation = event.target.PickupLocation.value;
+        const Capacity = event.target.Capacity.value;
+        const ImgURL = event.target.ImgURL.value;
+        const Type = event.target.Type.value;
+        const RentPrice = event.target.RentPrice.value;
+        const userId = user.id;
+
+        const carData = {
+            Name, Status, Description, PickupLocation, Capacity,
+            ImgURL, Type, RentPrice, userId
+        }
 
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars`, {
