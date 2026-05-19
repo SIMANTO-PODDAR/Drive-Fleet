@@ -1,13 +1,52 @@
 "use client"
 import GoogleLoginButton from "@/Components/GoogleLoginButton";
+import { authClient } from "@/lib/auth-client";
 import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const RegistrationPage = () => {
     const [eyeSlash, setEyeSlash] = useState(false);
-    
+    const router = useRouter();
+
+    const Registration = async (e) => {
+        e.preventDefault();
+        const LoadingToast = toast.loading('Processing your request..');
+
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const photo = e.target.photo.value;
+        const password = e.target.password.value;
+
+        const { data, error } = await authClient.signUp.email(
+            {
+                name: name,
+                email: email,
+                password: password,
+                image: photo,
+            },
+
+            {
+                onSuccess: async () => {
+                    toast.success("Registration completed successfully.", {
+                        id: LoadingToast
+                    });
+                    await authClient.signOut();
+                    router.push('/login');
+                }
+            }
+        );
+
+        if (error) {
+            toast.error(error.message, {
+                id: LoadingToast
+            })
+        };
+    };
+
     return (
         <div>
             <div>
@@ -24,7 +63,7 @@ const RegistrationPage = () => {
                 <div className="justify-center mt-5">
 
                     <Form className="flex w-96 flex-col gap-4"
-                    // onSubmit={}
+                        onSubmit={Registration}
                     >
 
                         {/* Name */}

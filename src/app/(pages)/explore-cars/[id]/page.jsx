@@ -6,6 +6,8 @@ const CarDetailsPage = async ({ params }) => {
 
     const car = await res.json();
 
+    const bookby = await car.BookBy;
+
     return (
         <div className="mb-12">
             <h2 className="text-center mt-3 text-4xl text-[#0D0D33] md:text-5xl font-bold mb-4">
@@ -32,7 +34,7 @@ const CarDetailsPage = async ({ params }) => {
                                     <h2>BookBy</h2>
                                 </label>
 
-                                <span>{car.BookBy}</span>
+                                { bookby ? (<span>{car.BookBy}</span>) : ('0') }
                             </div>
 
                             <div className="flex items-center border rounded-xl p-2 justify-between">
@@ -59,7 +61,7 @@ const CarDetailsPage = async ({ params }) => {
                                     <h2>RentPrice</h2>
                                 </label>
 
-                                <span>{car.RentPrice}</span>
+                                <span>$ {car.RentPrice}</span>
                             </div>
 
                             <div className="flex items-center border rounded-xl p-2 justify-between">
