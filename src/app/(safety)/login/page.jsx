@@ -77,12 +77,12 @@ const LoginPage = () => {
                         {/* Password */}
                         <TextField
                             isRequired
-                            minLength={6}
+                            minLength={8}
                             name="password"
                             type="password"
                             validate={(value) => {
-                                if (value.length < 6) {
-                                    return "Password must be at least 6 characters";
+                                if (value.length < 8) {
+                                    return "Password must be at least 8 characters";
                                 }
                                 if (!/[A-Z]/.test(value)) {
                                     return "Password must contain at least one uppercase letter";
@@ -116,7 +116,7 @@ const LoginPage = () => {
                                 </InputGroup.Suffix>
                             </InputGroup>
 
-                            <Description>Must be at least 6 characters with 1 uppercase, 1 lowercase and 1 number</Description>
+                            <Description>Must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number</Description>
                             <FieldError />
 
                         </TextField>
@@ -127,9 +127,12 @@ const LoginPage = () => {
                                 Login
                             </button>
                         </div>
-                        <h1 className="font-bold text-center opacity-80">No account yet? <Link href='/registration' className="underline italic text-[#0033FF] opacity-100">Register Here</Link></h1>
-                        <GoogleLoginButton />
+                        <div className="divider mt-0">OR</div>
                     </Form>
+
+                    <GoogleLoginButton BtnFor={'Login'} />
+
+                    <h1 className="font-bold text-center opacity-80 mt-3">No account yet? <Link href='/registration' className="underline italic text-[#0033FF] opacity-100">Register Here</Link></h1>
                 </div>
             </div>
         </div>
