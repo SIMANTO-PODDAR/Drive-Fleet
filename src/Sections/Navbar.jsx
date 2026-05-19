@@ -28,9 +28,7 @@ const Navbar = () => {
 
     return (
         <div className="sm:sticky top-0 z-50">
-            <div className="navbar bg-base-100 shadow-sm 
-            flex-col justify-center
-            sm:flex-row">
+            <div className="navbar bg-base-100 shadow-sm flex-col sm:flex-row">
                 <div className="sm:navbar-start">
                     <Image src={Logo} alt='DriveFleet Logo' height={40} title="Drive Fleet" />
                 </div>

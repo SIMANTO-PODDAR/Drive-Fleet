@@ -6,26 +6,37 @@ import { IoAddCircleOutline } from "react-icons/io5";
 
 const AddCarPage = () => {
 
-    const { data } = authClient.useSession();
-    const user = data?.user;
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
 
     const addCar = async (event) => {
         event.preventDefault();
         const LoadingToast = toast.loading('Adding car...');
 
         const Name = event.target.Name.value;
-        const Status = event.target.Status.value;
-        const Description = event.target.Description.value;
-        const PickupLocation = event.target.PickupLocation.value;
-        const Capacity = event.target.Capacity.value;
-        const ImgURL = event.target.ImgURL.value;
-        const Type = event.target.Type.value;
         const RentPrice = event.target.RentPrice.value;
-        const userId = user.id;
+        const BookBy = 0;
+        const Type = event.target.Type.value;
+        const ImgURL = event.target.ImgURL.value;
+        const Capacity = event.target.Capacity.value;
+        const PickupLocation = event.target.PickupLocation.value;
+        const Description = event.target.Description.value;
+        const Status = event.target.Status.value;
+        const userId = user?.id;
+
 
         const carData = {
-            Name, Status, Description, PickupLocation, Capacity,
-            ImgURL, Type, RentPrice, userId
+            Name,
+            RentPrice,
+            BookBy,
+            Type,
+            ImgURL,
+            Capacity,
+            PickupLocation,
+            Description,
+            Status,
+
+            userId
         }
 
 

@@ -11,7 +11,7 @@ const CarCard = ({ car }) => {
                         alt={car.Name} />
                 </figure>
                 <div className="flex mt-auto">
-                    <div className="card-body h-[165px]">
+                    <div className="card-body h-42">
                         <h2 className="card-title">
                             <p className="text-sm text-left font-bold text-[#0D0D33]"> {car.Name}</p>
 
