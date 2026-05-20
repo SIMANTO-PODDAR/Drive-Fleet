@@ -24,7 +24,7 @@ const MyAddedCarsPage = async () => {
                 </p>
             </div>
 
-            <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-5 justify-center gap-10">
                 {
                     addedCars.map((car, ind) =>
                         <MyAddedCarsCard key={ind} car={car} />)
