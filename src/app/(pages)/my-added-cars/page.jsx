@@ -31,6 +31,12 @@ const MyAddedCarsPage = async () => {
 
                 }
             </div>
+
+            {
+                addedCars.length == 0 && (<h2 className="text-xl text-[#0D0D33] md:text-2xl font-bold mb-4 mt-4 text-center card m-3 w-80 mx-auto">
+                    No Cars Added Yet.
+                </h2>)
+            }
         </div>
     );
 };

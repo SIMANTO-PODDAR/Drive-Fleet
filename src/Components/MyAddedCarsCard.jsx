@@ -35,10 +35,9 @@ const MyAddedCarsCard = ({ car }) => {
 
                         </div>
                         <div className="card-actions justify-between items-baseline">
-                            <DeleteAddedCar />
+                            <DeleteAddedCar carId={car._id} />
 
                             <Button className="btn btn-sm flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Update</Button>
-
                         </div>
                     </div>
                 </div>

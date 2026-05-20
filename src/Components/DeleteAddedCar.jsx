@@ -1,8 +1,34 @@
+"use client"
 import { TrashBin } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
+import toast from "react-hot-toast";
 import { FcDeleteDatabase } from "react-icons/fc";
 
-const DeleteAddedCar = () => {
+const DeleteAddedCar = ({ carId }) => {
+
+    const deleteCar = async () => {
+        const LoadingToast = toast.loading('Processing your request...');
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars/${carId}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+            }
+        })
+
+        if (res.ok == true) {
+            toast.success('Car deleted successfully!', {
+                id: LoadingToast
+            });
+            window.location.reload();
+        }
+        else {
+            toast.error('Something went wrong! Try again.', {
+                id: LoadingToast
+            });
+        };
+    };
+
     return (
         <div>
             <AlertDialog>
@@ -29,7 +55,7 @@ const DeleteAddedCar = () => {
                                 <Button slot="close" variant="tertiary">
                                     Cancel
                                 </Button>
-                                <Button slot="close" variant="danger">
+                                <Button onClick={deleteCar} slot="close" variant="danger">
                                     Delete
                                 </Button>
                             </AlertDialog.Footer>
