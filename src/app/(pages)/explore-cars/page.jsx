@@ -2,7 +2,8 @@ import CarCard from "@/Components/CarCard";
 
 const ExploreCarsPage = async () => {
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars`, { cache: "no-store" });
+
     const allCars = await res.json();
 
     return (

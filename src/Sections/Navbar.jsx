@@ -20,6 +20,7 @@ const Navbar = () => {
             fetchOptions: {
                 onSuccess: () => {
                     toast.success('Log out successfully!');
+                    window.location.reload();
                     router.push("/");
                 },
             },
