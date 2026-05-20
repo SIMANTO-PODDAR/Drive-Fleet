@@ -70,10 +70,9 @@ const CarDetailsPage = async ({ params }) => {
 
                                 <span className={`badge badge-outline  badge-sm ${car.Status == "Available" ? 'badge-success' : 'badge-warning'}`}>{car.Status}</span>
                             </div>
-                        </div>
-
-                        <div className="flex justify-end">
-                            <BookNowButton car={car} />
+                            <div className="flex justify-center">
+                                <BookNowButton car={car} />
+                            </div>
                         </div>
                     </div>
                 </div>

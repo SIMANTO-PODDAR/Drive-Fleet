@@ -8,17 +8,50 @@ const BookNowButton = ({ car }) => {
     const { data: session } = authClient.useSession();
     const user = session?.user;
 
-    const Booking = (event) => {
+    const Booking = async (event) => {
         event.preventDefault();
-        console.log(user)
-        toast(car.Name)
-    }
+        const LoadingToast = toast.loading('Processing your request...');
+
+        const Data = {
+            //Booking data
+            CarName: car.Name,
+            TotalPrice: car.RentPrice,
+            BookingDate: new Date(),
+
+            //user data 
+            userId: user?.id,
+
+            //form data
+            DriverNeeded: event.target.Driver.value,
+            SpecialNote: event.target.Note.value,
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-bookings`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(Data),
+        });
+
+        if (res.ok == true) {
+            toast.success('Booking successful.', {
+                id: LoadingToast
+            });
+        }
+
+        else {
+            toast.error('Something went wrong! Try again.', {
+                id: LoadingToast
+            });
+        };
+    };
 
     return (
         <div>
             <Modal>
 
-                <Button className="btn btn-sm font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Book Now</Button>
+                <Button className="btn btn-[15px] font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Book Now</Button>
 
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">
@@ -81,7 +114,7 @@ const BookNowButton = ({ car }) => {
                                         </div>
 
                                         <Modal.Footer>
-                                            <Button type="submit" className="btn btn-sm flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Book Now</Button>
+                                            <Button type="submit" className="btn btn-[15px] flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Book Now</Button>
                                         </Modal.Footer>
                                     </form>
                                 </Surface>
