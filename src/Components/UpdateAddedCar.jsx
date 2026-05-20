@@ -55,7 +55,7 @@ const UpdateAddedCar = ({ car }) => {
 
                 <Modal.Backdrop>
                     <Modal.Container placement="auto">
-                        <Modal.Dialog className="sm:max-w-xl">
+                        <Modal.Dialog className="sm:max-w-xl mt-50">
                             <Modal.CloseTrigger />
                             <Modal.Header>
                                 <Modal.Heading>Update Car Info</Modal.Heading>

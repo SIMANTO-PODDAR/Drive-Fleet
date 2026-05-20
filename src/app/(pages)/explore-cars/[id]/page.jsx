@@ -1,3 +1,4 @@
+import BookNowButton from "@/Components/BookNowButton";
 
 const CarDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -71,8 +72,8 @@ const CarDetailsPage = async ({ params }) => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end mt-2">
-                            <button className="btn btn-primary">Book Now</button>
+                        <div className="flex justify-end">
+                            <BookNowButton car={car} />
                         </div>
                     </div>
                 </div>
