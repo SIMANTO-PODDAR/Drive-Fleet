@@ -1,5 +1,5 @@
 import { Button } from "@heroui/react";
-import Link from "next/link";
+import DeleteAddedCar from "./DeleteAddedCar";
 
 const MyAddedCarsCard = ({ car }) => {
     return (
@@ -35,9 +35,7 @@ const MyAddedCarsCard = ({ car }) => {
 
                         </div>
                         <div className="card-actions justify-between items-baseline">
-                            <button className="btn btn-sm btn-outline btn-secondary">
-                                Delete
-                            </button>
+                            <DeleteAddedCar />
 
                             <Button className="btn btn-sm flex gap-2  items-center justify-start font-bold text-white bg-linear-to-r from-[#0D0D33] to-[#0033FF]">Update</Button>
 
