@@ -12,11 +12,28 @@ const BookNowButton = ({ car }) => {
         event.preventDefault();
         const LoadingToast = toast.loading('Processing your request...');
 
+        if (!user) {
+            toast.error('Please login and try again.', {
+                id: LoadingToast
+            });
+            return;
+        };
+
+        if (car.Status == "Unavailable") {
+            toast.error(`Oops! This car is currently unavailable.
+                Please choose another available car.`, {
+                id: LoadingToast
+            });
+            return;
+        };
+
         const Data = {
             //Booking data
             CarName: car.Name,
             TotalPrice: car.RentPrice,
             BookingDate: new Date(),
+
+            CarId: car._id,
 
             //user data 
             userId: user?.id,
@@ -38,8 +55,11 @@ const BookNowButton = ({ car }) => {
             toast.success('Booking successful.', {
                 id: LoadingToast
             });
-        }
 
+            setTimeout(() => {
+                window.location.reload();
+            }, 2300);
+        }
         else {
             toast.error('Something went wrong! Try again.', {
                 id: LoadingToast
