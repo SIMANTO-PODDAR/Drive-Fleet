@@ -1,9 +1,11 @@
 'use client'
 import { Button, FieldError, Input, Label, ListBox, Modal, Select, Surface, TextArea, TextField } from "@heroui/react";
+import toast from "react-hot-toast";
 
 const UpdateAddedCar = ({ car }) => {
 
-    const UpdateInfo = (event) => {
+    const UpdateInfo = async (event) => {
+        const LoadingToast = toast.loading('Processing your request...');
         event.preventDefault();
 
         const RentPrice = event.target.RentPrice.value;
@@ -13,14 +15,37 @@ const UpdateAddedCar = ({ car }) => {
         const Description = event.target.Description.value;
         const Status = event.target.Status.value;
 
-        console.log(`
-            RentPrice = ${RentPrice}
-            Type = ${Type}
-            ImgURL = ${ImgURL}
-            PickupLocation = ${PickupLocation}
-            Description = ${Description}
-            Status = ${Status}
-        `)
+        const carData = {
+            RentPrice,
+            Type,
+            ImgURL,
+            PickupLocation,
+            Description,
+            Status
+        };
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars/${car?._id}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                },
+
+                body: JSON.stringify(carData)
+            });
+
+        if (res.ok == true) {
+            toast.success('Car data updated successfully!', {
+                id: LoadingToast
+            });
+            window.location.reload();
+        }
+
+        else {
+            toast.error('Something went wrong! Try again.', {
+                id: LoadingToast
+            });
+        };
     }
 
     return (
