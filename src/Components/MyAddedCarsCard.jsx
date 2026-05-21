@@ -26,8 +26,8 @@ const MyAddedCarsCard = ({ car }) => {
                             <div className="flex justify-between  p-1 border rounded-xl my-0.5">Capacity
                                 <span className="mr-4">{car.Capacity}</span>
                             </div>
-                            <div className="flex justify-between  p-1 border rounded-xl">Location
-                                <span className="mr-4">{car.PickupLocation}</span>
+                            <div className="flex justify-between gap-5 p-1 border rounded-xl">Location
+                                <span className="mr-4 line-clamp-1">{car.PickupLocation}</span>
                             </div>
                             <div className="flex justify-between  p-1 border rounded-xl my-0.5">RentPrice
                                 <span className="mr-4">$ {car.RentPrice}</span>

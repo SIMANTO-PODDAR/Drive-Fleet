@@ -127,6 +127,9 @@ const CarDetailsPage = async ({ params }) => {
                         <h2 className="text-xl font-bold text-[#0D0D33] mb-3">
                             Description
                         </h2>
+                        <p className={`text-left line-clamp-1 font-bold text-[13px] text-green-600 underline italic  ${car.UserListedCar == true ? 'grid' : 'hidden'}`}>
+                            User Listed Car
+                        </p>
                         <p className="text-slate-600 leading-relaxed text-justify">
                             {car?.Description}
                         </p>

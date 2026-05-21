@@ -11,17 +11,19 @@ const CarCard = ({ car }) => {
                         alt={car.Name} />
                 </figure>
                 <div className="flex mt-auto">
-                    <div className="card-body h-42">
+                    <div className="card-body">
                         <h2 className="card-title">
                             <p className="text-sm text-left font-bold text-[#0D0D33]"> {car.Name}</p>
 
                             <div className={`badge badge-outline  badge-sm ${car.Status == "Available" ? 'badge-success' : 'badge-warning'}`}>{car.Status}</div>
-
                         </h2>
+                        <p className={`text-left line-clamp-1 font-bold text-[11px] text-green-600 underline italic  ${car.UserListedCar == true ? 'grid' : 'hidden'}`}>
+                            User Listed Car
+                        </p>
                         <p className="text-justify line-clamp-2">
                             {car.Description}
                         </p>
-                        <div className="card-actions justify-between items-baseline">
+                        <div className="card-actions justify-between items-baseline pt-0">
                             <div className="badge badge-outline">
                                 $ {car.RentPrice}
                             </div>

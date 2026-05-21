@@ -74,6 +74,8 @@ const UpdateAddedCar = ({ car }) => {
                                                 isRequired>
                                                 <Label>Daily Rent Price</Label>
                                                 <Input
+                                                    min={1}
+                                                    max={100000}
                                                     type="number"
                                                     placeholder="Enter daily rent price"
                                                     className="rounded-2xl"
@@ -185,13 +187,13 @@ const UpdateAddedCar = ({ car }) => {
                                                 name="PickupLocation"
                                                 isRequired>
                                                 <Label>Pickup Location</Label>
-                                                <Input placeholder="e.g. Dhaka" className="rounded-2xl" />
+                                                <Input maxLength={50} placeholder="e.g. Dhaka" className="rounded-2xl" />
                                                 <FieldError />
                                             </TextField>
 
                                             {/* Description */}
                                             <div className="md:col-span-2">
-                                                <TextField
+                                                <TextField maxLength={170}
                                                     defaultValue={car.Description}
                                                     name="Description"
                                                     isRequired>

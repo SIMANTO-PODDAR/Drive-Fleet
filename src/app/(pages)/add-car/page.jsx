@@ -23,6 +23,7 @@ const AddCarPage = () => {
         const Description = event.target.Description.value;
         const Status = event.target.Status.value;
         const userId = user?.id;
+        const UserListedCar = true;
 
 
         const carData = {
@@ -36,7 +37,8 @@ const AddCarPage = () => {
             Description,
             Status,
 
-            userId
+            userId,
+            UserListedCar
         }
 
         const { data: tokenData } = await authClient.token();
@@ -82,7 +84,7 @@ const AddCarPage = () => {
                             <div className="md:col-span-2">
                                 <TextField name="Name" isRequired>
                                     <Label>Car Name</Label>
-                                    <Input placeholder="Enter car name" className="rounded-2xl" />
+                                    <Input maxLength={35} placeholder="Enter car name" className="rounded-2xl" />
                                     <FieldError />
                                 </TextField>
                             </div>
@@ -91,6 +93,8 @@ const AddCarPage = () => {
                             <TextField name="RentPrice" type="number" isRequired>
                                 <Label>Daily Rent Price</Label>
                                 <Input
+                                    min={1}
+                                    max={100000}
                                     type="number"
                                     placeholder="Enter daily rent price"
                                     className="rounded-2xl"
@@ -161,6 +165,9 @@ const AddCarPage = () => {
                             <TextField name="Capacity" isRequired>
                                 <Label>Seat Capacity</Label>
                                 <Input
+                                    type="number"
+                                    min={1}
+                                    max={500}
                                     placeholder="Enter seat capacity"
                                     className="rounded-2xl"
                                 />
@@ -170,15 +177,16 @@ const AddCarPage = () => {
                             {/* Pickup Location */}
                             <TextField name="PickupLocation" isRequired>
                                 <Label>Pickup Location</Label>
-                                <Input placeholder="e.g. Dhaka" className="rounded-2xl" />
+                                <Input maxLength={50} placeholder="e.g. Dhaka" className="rounded-2xl" />
                                 <FieldError />
                             </TextField>
 
                             {/* Description */}
                             <div className="md:col-span-2">
-                                <TextField name="Description" isRequired>
+                                <TextField maxLength={170} name="Description" isRequired>
                                     <Label>Description</Label>
                                     <TextArea
+
                                         placeholder="Write details about the car..."
                                         className="rounded-3xl"
                                     />
@@ -219,7 +227,7 @@ const AddCarPage = () => {
                         </div>
 
                         {/* Submit Btn*/}
-                        <div className="">
+                        <div >
                             <Button
                                 type="submit"
                                 variant="outline"
