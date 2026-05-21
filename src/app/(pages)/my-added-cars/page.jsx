@@ -8,9 +8,20 @@ const MyAddedCarsPage = async () => {
         headers: await headers()
     })
 
+    const token = await auth.api.getToken({
+        headers: await headers(),
+    });
+
+    const userToken = token.token;
     const userId = await session?.user?.id
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars/${userId}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/added-cars/${userId}`, {
+        headers:
+        {
+            authorization: `Bearer ${userToken}`
+        }
+    });
+
     const addedCars = await res.json();
 
     return (

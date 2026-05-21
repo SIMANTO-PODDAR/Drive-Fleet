@@ -1,4 +1,6 @@
+import Link from "next/link";
 import BookNowButton from "@/Components/BookNowButton";
+import { FiArrowLeft, FiTag, FiUsers, FiUser, FiInfo } from "react-icons/fi";
 
 const CarDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -8,74 +10,165 @@ const CarDetailsPage = async ({ params }) => {
     const car = await res.json();
 
     return (
-        <div className="mb-12">
-            <h2 className="text-center mt-3 text-4xl text-[#0D0D33] md:text-5xl font-bold mb-4">
-                Details Info
-            </h2>
-            <div className="hero bg-base-200 min-h-[80vh]">
-                <div className="hero-content flex flex-col sm:grid sm:grid-cols-2 justify-center mx-auto gap-10">
-                    <img
-                        src={car?.ImgURL}
-                        alt={car?.Name}
-                        className="w-50 sm:w-100 rounded-lg shadow-2xl overflow-hidden"
-                    />
+        <div className="max-w-6xl mx-auto px-4 py-8 mb-12">
+            {/* Back Button */}
+            <div className="mb-6">
+                <Link
+                    href="/explore-cars"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
+                >
+                    <FiArrowLeft className="w-4 h-4" />
+                    <span>Back to Explore Cars</span>
+                </Link>
+            </div>
 
-                    <div className="min-w-70 sm:w-auto">
-                        <h1 className="text-3xl sm:text-4xl font-bold">{car?.Name}</h1>
-                        <p className="py-6">
-                            {car?.Description}
-                        </p>
 
-                        <div className="grid gap-3 max-w-60">
-                            <div className="flex items-center border rounded-xl p-2 justify-between">
-                                <label className="flex gap-1 items-center">
-                                    <input type="checkbox" className="checkbox" />
-                                    <h2>BookBy</h2>
-                                </label>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-                                <span>{car?.BookBy}</span>
+
+                <div className="lg:col-span-8 space-y-8">
+
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-bold text-[#0D0D33]">
+                                {car?.Name}
+                            </h1>
+                        </div>
+                        <div className="flex items-center">
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border ${car?.Status === "Available"
+                                ? "bg-green-50 text-green-700 border-green-200"
+                                : "bg-amber-50 text-amber-700 border-amber-200"
+                                }`}>
+                                {car?.Status}
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div className="bg-slate-100 rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+                        <img
+                            src={car?.ImgURL}
+                            alt={car?.Name}
+                            className="w-full h-auto max-h-[500px] object-cover mx-auto"
+                        />
+                    </div>
+
+
+                    <div>
+                        <h2 className="text-xl font-bold text-[#0D0D33] mb-4">
+                            Specifications
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                            <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div className="p-2 bg-indigo-50 text-[#0033FF] rounded-lg">
+                                    <FiTag className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider block">
+                                        Type
+                                    </span>
+                                    <span className="text-sm font-bold text-slate-800">
+                                        {car?.Type}
+                                    </span>
+                                </div>
                             </div>
 
-                            <div className="flex items-center border rounded-xl p-2 justify-between">
-                                <label className="flex gap-1 items-center">
-                                    <input type="checkbox" className="checkbox" />
-                                    <h2>Type</h2>
-                                </label>
 
-                                <span>{car?.Type}</span>
+                            <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div className="p-2 bg-indigo-50 text-[#0033FF] rounded-lg">
+                                    <FiUsers className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider block">
+                                        Capacity
+                                    </span>
+                                    <span className="text-sm font-bold text-slate-800">
+                                        {car?.Capacity} Persons
+                                    </span>
+                                </div>
                             </div>
 
-                            <div className="flex items-center border rounded-xl p-2 justify-between">
-                                <label className="flex gap-1 items-center">
-                                    <input type="checkbox" className="checkbox" />
-                                    <h2>Capacity</h2>
-                                </label>
-
-                                <span>{car?.Capacity}</span>
+                            <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div className="p-2 bg-indigo-50 text-[#0033FF] rounded-lg">
+                                    <FiUser className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider block">
+                                        Booked By
+                                    </span>
+                                    <span className="text-sm font-bold text-slate-800">
+                                        {car?.BookBy || "N/A"}
+                                    </span>
+                                </div>
                             </div>
 
-                            <div className="flex items-center border rounded-xl p-2 justify-between">
-                                <label className="flex gap-1 items-center">
-                                    <input type="checkbox" className="checkbox" />
-                                    <h2>RentPrice</h2>
-                                </label>
 
-                                <span>$ {car?.RentPrice}</span>
-                            </div>
-
-                            <div className="flex items-center border rounded-xl p-2 justify-between">
-                                <label className="flex gap-1 items-center">
-                                    <h2 className="badge badge-info">Status</h2>
-                                </label>
-
-                                <span className={`badge badge-outline  badge-sm ${car?.Status == "Available" ? 'badge-success' : 'badge-warning'}`}>{car?.Status}</span>
-                            </div>
-                            <div className="flex justify-center">
-                                <BookNowButton car={car} />
+                            <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <div className={`p-2 rounded-lg ${car?.Status === "Available" ? "bg-green-50 text-green-600" : "bg-amber-50 text-amber-600"
+                                    }`}>
+                                    <FiInfo className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider block">
+                                        Status
+                                    </span>
+                                    <span className={`text-sm font-bold ${car?.Status === "Available" ? "text-green-600" : "text-amber-600"
+                                        }`}>
+                                        {car?.Status}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+                    <div className="border-t border-slate-200 pt-6">
+                        <h2 className="text-xl font-bold text-[#0D0D33] mb-3">
+                            Description
+                        </h2>
+                        <p className="text-slate-600 leading-relaxed text-justify">
+                            {car?.Description}
+                        </p>
+                    </div>
+
                 </div>
+
+
+                <div className="lg:col-span-4 lg:sticky lg:top-6">
+                    <div className="border border-slate-200 rounded-2xl p-6 bg-white shadow-sm space-y-6">
+                        <div>
+                            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                                Rental Price
+                            </span>
+                            <div className="flex items-baseline gap-1">
+                                <span className="text-3xl font-bold text-[#0D0D33]">
+                                    $ {car?.RentPrice}
+                                </span>
+                                <span className="text-slate-500 font-medium text-sm">/ day</span>
+                            </div>
+                        </div>
+
+                        <div className="border-t border-slate-100 pt-4 space-y-3 text-sm">
+                            <div className="flex justify-between">
+                                <span className="text-slate-500 font-medium">Status</span>
+                                <span className={`font-semibold ${car?.Status === "Available" ? "text-green-600" : "text-amber-600"
+                                    }`}>
+                                    {car?.Status}
+                                </span>
+                            </div>
+                            <div className="flex justify-between border-t border-slate-50 pt-2">
+                                <span className="text-slate-500 font-medium">Taxes & Fees</span>
+                                <span className="text-slate-800 font-semibold">Calculated at checkout</span>
+                            </div>
+                        </div>
+
+                        <div className="pt-2 flex justify-center w-full">
+                            <BookNowButton car={car} />
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

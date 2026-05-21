@@ -39,11 +39,14 @@ const AddCarPage = () => {
             userId
         }
 
+        const { data: tokenData } = await authClient.token();
+        const userToken = tokenData?.token;
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${userToken}`
             },
             body: JSON.stringify(carData)
         });

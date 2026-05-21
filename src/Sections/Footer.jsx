@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Logo from '../../public/drivefleet-logo.png';
 import { BsTwitterX } from "react-icons/bs";
 import { CiFacebook, CiYoutube } from "react-icons/ci";
@@ -11,9 +12,10 @@ const Footer = () => {
                 <div className="footer sm:footer-horizontal items-baseline grid grid-cols-1 sm:grid-cols-3 sm:justify-around gap-4">
                     <nav>
                         <h6 className="footer-title">Links</h6> {/* Useful Links  */}
-                        <a className="link-hover font-bold  text-[#0D0D33]">Explore Cars</a>
-                        <a className="link-hover font-bold  text-[#0D0D33]">Add Car</a>
-                        <a className="link-hover font-bold  text-[#0D0D33]">My Bookings</a>
+                        <Link className="link-hover font-bold text-[#0D0D33]" href="/add-car">Add Car</Link>
+                        <Link className="link-hover font-bold text-[#0D0D33]" href="/explore-cars">Explore Cars</Link>
+                        <Link className="link-hover font-bold text-[#0D0D33]" href="/my-bookings">My Bookings</Link>
+                        <Link className="link-hover font-bold text-[#0D0D33]" href="/my-added-cars">My Added Cars</Link>
                         <a className=" w-48 h-0.5"></a>
                     </nav>
                     <nav>
