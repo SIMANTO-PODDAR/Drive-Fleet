@@ -98,7 +98,7 @@ const CarDetailsPage = async ({ params }) => {
                                         Booked By
                                     </span>
                                     <span className="text-sm font-bold text-slate-800">
-                                        {car?.BookBy || "N/A"}
+                                        {car?.BookBy || "0"}
                                     </span>
                                 </div>
                             </div>

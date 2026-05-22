@@ -187,7 +187,7 @@ const UpdateAddedCar = ({ car }) => {
                                                 name="PickupLocation"
                                                 isRequired>
                                                 <Label>Pickup Location</Label>
-                                                <Input maxLength={50} placeholder="e.g. Dhaka" className="rounded-2xl" />
+                                                <Input type="text" maxLength={50} placeholder="e.g. Dhaka" className="rounded-2xl" />
                                                 <FieldError />
                                             </TextField>
 

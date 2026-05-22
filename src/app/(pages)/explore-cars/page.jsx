@@ -1,8 +1,18 @@
 import CarCard from "@/Components/CarCard";
+import SearchFilter from "@/Components/SearchFilter";
 
-const ExploreCarsPage = async () => {
+const ExploreCarsPage = async ({ searchParams }) => {
+    const params = await searchParams;
+    const search = params?.search || "";
+    const type = params?.type || "";
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars`, { cache: "no-store" });
+    const query = new URLSearchParams();
+    if (search) query.set("search", search);
+    if (type) query.set("type", type);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/all-cars?${query.toString()}`, {
+        cache: "no-store"
+    });
 
     const allCars = await res.json();
 
@@ -15,14 +25,22 @@ const ExploreCarsPage = async () => {
                 Discover cars that match your needs. Compare details, explore options, and choose confidently.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-5 justify-center gap-10">
-                {
-                    allCars.map((car, ind) =>
-                        <CarCard key={ind} car={car} />)
-
-                }
+            <div className="p-3 sm:p-0">
+                <SearchFilter initialSearch={search} initialType={type} />
             </div>
 
+
+            {allCars.length === 0 ? (
+                <div className="text-center text-gray-500 my-10 text-xl font-semibold">
+                    No cars found matching your criteria.
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 my-5 justify-center gap-10">
+                    {allCars.map((car, ind) => (
+                        <CarCard key={car._id || ind} car={car} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

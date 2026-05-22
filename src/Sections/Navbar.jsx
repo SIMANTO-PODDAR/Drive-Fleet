@@ -53,7 +53,7 @@ const Navbar = () => {
 
                     <div className={`dropdown ${user ? '' : 'hidden'}`}>
                         <div className="flex gap-2 items-center">
-                            <div>
+                            <div tabIndex={0} className="hover:cursor-pointer">
                                 <Avatar>
                                     <Avatar.Image alt={user?.name} src={user?.image}
                                         referrerPolicy="no-referrer" />
