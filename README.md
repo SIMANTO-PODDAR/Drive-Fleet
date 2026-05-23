@@ -13,6 +13,9 @@ DriveFleet comes packed with features designed to provide an optimal car rental 
 - **🚗 Interactive Car Exploration**
   Explore a wide range of cars with details such as rental pricing, availability, specifications, and images. The dynamic interface updates instantly as listings change.
 
+- **🔍 Advanced Search & Filtering**
+  Instantly find the perfect vehicle by searching across names or types, keeping the fleet highly discoverable.
+
 - **📅 End-to-End Booking Management**
   Seamless booking process where users can reserve cars for specific dates. An interactive, centralized **Booking Dashboard** allows users to monitor booking statuses, modify dates, or cancel reservations with real-time updates.
 
