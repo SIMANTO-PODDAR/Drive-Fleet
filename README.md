@@ -13,6 +13,9 @@ DriveFleet is a premium, full-stack car rental platform built on Next.js 16 and 
       <td valign="top" width="60%">
         <img src="https://i.ibb.co.com/ZjLDQrh/Drive-Fleet-Desktop.jpg" alt="DriveFleet Desktop View" width="100%" style="border-radius: 8px;" />
       </td>
+      <td valign="top" width="35%">
+        <img src="https://i.ibb.co.com/0pYVC3Rx/Drive-Fleet-Mobile.jpg" alt="DriveFleet Mobile View" width="100%" style="border-radius: 8px;" />
+      </td>
     </tr>
   </table>
 </div>
