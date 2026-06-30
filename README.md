@@ -3,7 +3,7 @@
 DriveFleet is a premium, full-stack car rental platform built on Next.js 16 and MongoDB. It allows users to effortlessly list, explore, and book vehicles. Designed with a sleek user interface, secure authentication, and a dynamic booking flow, DriveFleet connects car owners and renters in a seamless marketplace.
 
 ### 🌐 Live Application URL [https://drivefleet-by-sp.vercel.app](https://drivefleet-by-sp.vercel.app)
-### 🌐 Server URL [https://drivefleet-server.vercel.app](https://server-a9.vercel.app)
+### 🌐 Server Repo: [https://github.com/SIMANTO-PODDAR/server-a9.git](https://github.com/SIMANTO-PODDAR/server-a9.git)
 
 ---
 
