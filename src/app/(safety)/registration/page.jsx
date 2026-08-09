@@ -5,20 +5,110 @@ import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const RegistrationPage = () => {
     const [eyeSlash, setEyeSlash] = useState(false);
+    const [imageUrl, setImageUrl] = useState("");
+    const [isUploading, setIsUploading] = useState(false);
+    const [dragActive, setDragActive] = useState(false);
+    const fileInputRef = useRef(null);
     const router = useRouter();
+
+    const handleFileUpload = async (file) => {
+        if (!file) return;
+
+        if (imageUrl) {
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+            toast.error("Please select a valid image file.");
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            toast.error("Image size must be less than 5MB.");
+            return;
+        }
+
+        setIsUploading(true);
+        const loadingToast = toast.loading("Uploading image...");
+
+        try {
+            const formData = new FormData();
+            formData.append("image", file);
+
+            const response = await fetch(
+                `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_UPLOAD_API}`,
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
+
+            const resData = await response.json();
+
+            if (resData.success && resData.data?.url) {
+                setImageUrl(resData.data.url);
+                toast.success("Image uploaded successfully!", { id: loadingToast });
+            } else {
+                toast.error(resData.error?.message || "Failed to upload image.", { id: loadingToast });
+            }
+        } catch (err) {
+            toast.error("Failed to upload image. Please try again.", { id: loadingToast });
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!imageUrl && !isUploading) {
+            setDragActive(true);
+        }
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+
+        if (imageUrl || isUploading) return;
+
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            handleFileUpload(e.dataTransfer.files[0]);
+        }
+    };
+
+    const handleFileChange = (e) => {
+        if (imageUrl || isUploading) return;
+
+        if (e.target.files && e.target.files[0]) {
+            handleFileUpload(e.target.files[0]);
+        }
+    };
 
     const Registration = async (e) => {
         e.preventDefault();
+
+        if (!imageUrl) {
+            toast.error("Please upload a profile image first.");
+            return;
+        }
+
         const LoadingToast = toast.loading('Processing your request..');
 
         const name = e.target.name.value;
         const email = e.target.email.value;
-        const photo = e.target.photo.value;
         const password = e.target.password.value;
 
         const { data, error } = await authClient.signUp.email(
@@ -26,7 +116,7 @@ const RegistrationPage = () => {
                 name: name,
                 email: email,
                 password: password,
-                image: photo,
+                image: imageUrl,
             },
 
             {
@@ -95,16 +185,74 @@ const RegistrationPage = () => {
                             <FieldError />
                         </TextField>
 
-                        {/* Photo-url */}
-                        <TextField
-                            isRequired
-                            name="photo"
-                            type="url"
-                        >
-                            <Label>Photo URL</Label>
-                            <Input placeholder="Enter your Photo URL" />
-                            <FieldError />
-                        </TextField>
+                        {/* Image Upload */}
+                        <div className="flex flex-col gap-1.5">
+                            <Label className="text-sm font-medium">Profile Image<span className="text-red-500">*</span></Label>
+                            <input
+                                isRequired
+                                type="file"
+                                ref={fileInputRef}
+                                onChange={handleFileChange}
+                                accept="image/*"
+                                className="hidden"
+                                disabled={isUploading || !!imageUrl}
+                            />
+
+                            {imageUrl ? (
+                                <div className="flex items-center gap-3 p-3 border rounded-xl border-green-500/50 bg-green-50/10">
+                                    <img
+                                        src={imageUrl}
+                                        alt="Profile Preview"
+                                        className="w-12 h-12 rounded-full object-cover border border-green-500"
+                                    />
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-semibold text-green-600 flex items-center gap-1">
+                                            <Check className="size-4" /> Ready
+                                        </span>
+                                        <span className="text-xs text-gray-500">Image successfully uploaded</span>
+                                    </div>
+                                </div>
+                            ) : isUploading ? (
+                                <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl border-blue-400 bg-blue-50/10">
+                                    <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-blue-600 mb-2"></div>
+                                    <p className="text-sm text-blue-600 font-medium">Uploading image...</p>
+                                </div>
+                            ) : (
+                                <div
+                                    onDragOver={handleDragOver}
+                                    onDragLeave={handleDragLeave}
+                                    onDrop={handleDrop}
+                                    onClick={() => {
+                                        if (!imageUrl && !isUploading) {
+                                            fileInputRef.current?.click();
+                                        }
+                                    }}
+                                    className={`flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${dragActive
+                                        ? "border-blue-500 bg-blue-50/20"
+                                        : "border-gray-300 hover:border-blue-400 hover:bg-gray-50/10"
+                                        }`}
+                                >
+                                    <svg
+                                        className="w-8 h-8 mb-2 text-gray-400"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                        ></path>
+                                    </svg>
+                                    <p className="text-sm text-gray-600 text-center">
+                                        <span className="font-semibold text-blue-600 underline">Browse</span> or drag & drop an image
+                                    </p>
+                                    <p className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 5MB</p>
+                                </div>
+                            )}
+                        </div>
 
                         {/* Password */}
                         <TextField
