@@ -212,25 +212,25 @@ const AddCarPage = () => {
 
                             {/* Car Type */}
                             <div>
-                                <Label className="text-sm font-medium mb-1.5 block text-gray-700 ">Car Type</Label>
+                                <Label className="text-sm font-medium mb-1.5 block text-gray-700 ">Car Type <span className="text-red-500">*</span></Label>
                                 <select
                                     name="Type"
                                     required
                                     defaultValue=""
-                                    className="w-full h-11 px-4 py-2.5 rounded-2xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900/60 text-black  font-medium hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 cursor-pointer shadow-xs"
+                                    className="w-full h-11 px-4 py-2.5 rounded-2xl border border-gray-300 dark:border-gray-700 bg-white/60 text-black font-medium hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 cursor-pointer shadow-xs"
                                 >
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="" disabled>Select a car type</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="SUV">SUV</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="Sedan">Sedan</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="Hatchback">Hatchback</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="Luxury">Luxury</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="Sports">Sports</option>
+                                    <option className="bg-white text-gray-600 font-medium" value="" disabled>Select a car type</option>
+                                    <option className="bg-white text-black  font-medium" value="SUV">SUV</option>
+                                    <option className="bg-white text-black  font-medium" value="Sedan">Sedan</option>
+                                    <option className="bg-white text-black  font-medium" value="Hatchback">Hatchback</option>
+                                    <option className="bg-white text-black  font-medium" value="Luxury">Luxury</option>
+                                    <option className="bg-white text-black  font-medium" value="Sports">Sports</option>
                                 </select>
                             </div>
 
                             {/* Car Image Upload */}
                             <div className="md:col-span-2 flex flex-col gap-1.5">
-                                <Label className="text-sm font-medium">Car Image</Label>
+                                <Label className="text-sm font-medium">Car Image <span className="text-red-500">*</span></Label>
                                 <input
                                     type="file"
                                     ref={fileInputRef}
@@ -331,16 +331,16 @@ const AddCarPage = () => {
 
                             {/* Availability Status */}
                             <div>
-                                <Label className="text-sm font-medium mb-1.5 block text-gray-700 ">Availability Status</Label>
+                                <Label className="text-sm font-medium mb-1.5 block text-gray-700 ">Availability Status <span className="text-red-500">*</span></Label>
                                 <select
                                     name="Status"
                                     required
                                     defaultValue=""
-                                    className="w-full h-11 px-4 py-2.5 rounded-2xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900/60 text-black  font-medium hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 cursor-pointer shadow-xs"
+                                    className="w-full h-11 px-4 py-2.5 rounded-2xl border border-gray-300 dark:border-gray-700 bg-white/60 text-black  font-medium hover:border-blue-500 dark:hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 cursor-pointer shadow-xs"
                                 >
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="" disabled>Available / Unavailable</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="Available">Available</option>
-                                    <option className="bg-white dark:bg-zinc-900 text-black  font-medium" value="Unavailable">Unavailable</option>
+                                    <option className="bg-white text-black  font-medium" value="" disabled>Available / Unavailable</option>
+                                    <option className="bg-white text-black  font-medium" value="Available">Available</option>
+                                    <option className="bg-white text-black  font-medium" value="Unavailable">Unavailable</option>
                                 </select>
                             </div>
                         </div>
