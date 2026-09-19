@@ -49,7 +49,7 @@ const CarDetailsPage = async ({ params }) => {
                         <img
                             src={car?.ImgURL}
                             alt={car?.Name}
-                            className="w-full h-auto max-h-[500px] object-cover mx-auto"
+                            className="w-full h-auto max-h-125 object-cover mx-auto"
                         />
                     </div>
 
